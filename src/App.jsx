@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 
 import PsychologistForm from './FormPsicologo';
 import PatientForm from './FormPaciente';
-import ReceiveForm from './FormRecibo';
+// import ReceiveForm from './FormRecibo';
 
 const theme = createTheme({
   typography: {
@@ -24,7 +24,7 @@ function App() {
       <ThemeProvider  theme={theme}>
         <PsychologistForm />
         <PatientForm />
-        <ReceiveForm />
+        {/* <ReceiveForm /> */}
       </ThemeProvider>
     </Box>
   )

@@ -31,7 +31,7 @@ function PsychologistForm() {
         '& > :not(style)': { m: 0.5, width: '25ch', mt: 1.75},
         display: 'flex', flexWrap: 'wrap'
       }}
-      onvalidate="on"
+      // onvalidate="on"
       autoComplete="off"
       >
         <TextField id="psi-name" label="Nome" variant="outlined" value={name} onChange={e => setName(e.target.value)} style={{width: '75ch'}} required={required}/>
@@ -42,7 +42,7 @@ function PsychologistForm() {
         <TextField id="psi-tel" label="Telefone" variant="outlined" value={phone} onChange={e => setPhone(e.target.value)} required={required}/>
         <TextField id="psi-endereco" label="Endereco" variant="outlined" value={endereco} onChange={e => setEndereco(e.target.value)} style={{width: '100ch'}} required={required}/>
         <TextField id="psi-nickredes" label="@ redes sociais" variant="outlined" value={nickRedes} onChange={e => setNickRedes(e.target.value)} required={required}/>
-        <Button type='submit' variant="contained" style={{padding: '1rem'}}>CONFIRMAR</Button><br required={required}/>
+        <Button type='submit' variant="contained" style={{padding: '1rem'}}>CONFIRMAR</Button><br/>
       </Box>
     </div>
   );

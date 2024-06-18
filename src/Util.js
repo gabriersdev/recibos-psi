@@ -1,4 +1,4 @@
-const moment = {};
+import moment from "moment";
 
 export default class Util{
   static validaCPF(cpf) {
@@ -6,7 +6,6 @@ export default class Util{
     cpf = cpf.replace(/[\s.-]*/gim, '');
     if (cpf.length !== 11) return false;
     if (cpf === '00000000000') return false;
-    console.log(cpf, typeof cpf);
     if (cpf.split('').every((v) => v === cpf.split[0])) return false;
     let soma = 0;
     let resto;
