@@ -4,6 +4,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Util from './Util';
 
+import $ from "jquery";
+import 'jquery-mask-plugin'; 
+
 
 // Imports para Autocomplete
 import moment from "moment";
@@ -13,6 +16,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 // Get days of the month
 const days = Array.from({ length: moment().daysInMonth() }, (_, i) => i + 1);
 const optionsAutocomplete = days.map((day) => { return { key: day, value: `${('0' + day).slice(-2)}/${('0' + (moment().month() + 1)).slice(-2)}` } });
+let selectedDays = [];
 
 function PatientForm() {
   const [name, setName] = useState('');
@@ -30,9 +34,17 @@ function PatientForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Aqui você pode lidar com a submissão do formulário
-    console.log({ name, CPF });
+    console.log(selectedDays);
+    if (selectedDays.length > 0) {
+      console.log({ name, CPF });
+      console.log('Dias selecionados:', selectedDays);
+    }
   };
   
+  $(() => {
+    $('#pat-CPF').mask('000.000.000-00');
+  });
+
   return (
     <div style={{textAlign: 'left'}}>
       <h2 style={{marginTop: '2rem'}}>Paciente</h2>
@@ -52,15 +64,17 @@ function PatientForm() {
         {/* Selec. dias do mês em que houveram sessões */}
         <Autocomplete
           multiple
-          id="tags-standard"
+          id="pat-days"
+          onChange={(event, newValue) => { newValue.length == 0 ? document.querySelector('#pat-days').setCustomValidity('Selecione ao menos um dia') : document.querySelector('#pat-days').setCustomValidity(''); event.preventDefault(); selectedDays = newValue;}}
           options={options}
           getOptionLabel={(option) => option.value}
+          isOptionEqualToValue={(option, value) => option.key === value.key}
           style={{ width: 300 }}
           renderInput={(params, index) => (
-            <TextField {...params} key={index} label="Dias das sessões" variant="outlined" />
+            <TextField {...params} key={index} label="Dias das sessões*" variant="outlined" />
           )}
         />
-        <Button type='submit' variant="contained" style={{padding: '1rem'}}>CONFIRMAR</Button><br/>
+        {/* <Button type='submit' variant="contained" style={{padding: '1rem'}}>CONFIRMAR</Button><br/> */}
       </Box>
     </div>
   );
