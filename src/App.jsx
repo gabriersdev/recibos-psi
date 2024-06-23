@@ -1,10 +1,7 @@
 import './App.css'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-
-import PsychologistForm from './FormPsicologo';
-import PatientForm from './FormPaciente';
-import ReceiveForm from './FormRecibo';
+import RecieveForm from './RecieveForm';
 
 const theme = createTheme({
   typography: {
@@ -23,9 +20,7 @@ function App() {
     <Box>
       <ThemeProvider  theme={theme}>
         <h1 style={{textAlign: 'left'}}>Gerador de Recibo</h1>
-        <PsychologistForm />
-        <PatientForm />
-        <ReceiveForm />
+        <RecieveForm></RecieveForm>
       </ThemeProvider>
     </Box>
   )
