@@ -14,14 +14,14 @@ import 'jquery-mask-plugin';
   // };
 
 const FieldsetPsychologist = (attr) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [name, setName] = useState('Ricardo');
+  const [email, setEmail] = useState('ricardo@mail.com');
+  const [phone, setPhone] = useState('(31) 99999-9999');
   const [atuacao, setAtuacao] = useState('Psicólogo clínico');
-  const [CRP, setCRP] = useState('');
-  const [CPF, setCPF] = useState('');
-  const [endereco, setEndereco] = useState('');
-  const [nickRedes, setNickRedes] = useState('');
+  const [CRP, setCRP] = useState('123456');
+  const [CPF, setCPF] = useState('123.456.789-09');
+  const [endereco, setEndereco] = useState('Rua dos Bobos, nº 0, Bairro dos Bobos, Cidade dos Bobos, Estado dos Bobos, CEP: 12345-678');
+  const [nickRedes, setNickRedes] = useState('@ricardo_psicologo');
 
   $(() => {
     $('#psi-CPF').mask('000.000.000-00');

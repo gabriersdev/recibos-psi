@@ -17,9 +17,9 @@ const days = Array.from({ length: moment().daysInMonth() }, (_, i) => i + 1);
 const optionsAutocomplete = days.map((day) => { return { key: day, value: `${('0' + day).slice(-2)}/${('0' + (moment().month() + 1)).slice(-2)}` } });
 
 function FieldsetPatient(attr) {
-  const [name, setName] = useState('');
-  const [CPF, setCPF] = useState('');
-  const [valorSessao, setValorSessao] = useState('');
+  const [name, setName] = useState('Roberto');
+  const [CPF, setCPF] = useState('123.456.789-09');
+  const [valorSessao, setValorSessao] = useState('1.000,00');
   
   const [options, setOptions] = useState([]);
 

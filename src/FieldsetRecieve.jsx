@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import $ from 'jquery';
 import 'jquery-mask-plugin';
 
-function FieldsetRecieve(attr) {  
+function FieldsetRecieve() {  
   const [valorTotal, setValorTotal] = useState('');
 
   $(() => {
@@ -24,7 +24,7 @@ function FieldsetRecieve(attr) {
       }}
       autoComplete="off"
       >
-        <TextField id="rec-valor-tot" label="Valor total" variant="outlined" value={valorTotal} onInput={e => setValorTotal(e.target.value)} style={{width: '75ch'}} required={attr.required}/>
+        <TextField id="rec-valor-tot" label="Valor total" variant="outlined" value={valorTotal} onInput={e => setValorTotal(e.target.value)} style={{width: '75ch'}} required={false}/>
       </Box>
       <div>
       </div>
