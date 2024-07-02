@@ -63,4 +63,8 @@ export default class Util{
   static transformaMoeda(valor) {
     return valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
   }
+
+  static BRLToFloat(valor) {
+    return parseFloat(valor.replace('R$', '').replace('.', '').replace(',', '.'));
+  }
 }
