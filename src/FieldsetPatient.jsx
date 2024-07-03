@@ -26,23 +26,13 @@ function FieldsetPatient(attr) {
   const [name, setName] = useState('Roberto');
   const [CPF, setCPF] = useState('123.456.789-09');
   const [valorSessao, setValorSessao] = useState('1.000,00');
-  
   const [options, setOptions] = useState([]);
-
-  const [age, setAge] = useState(moment().get('month'));
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
+  const [mes, setMes] = useState(moment().get('month'));
+  const [ano, setAno] = useState(moment().get('year'));
+  
   useEffect(() => {
     setOptions(optionsAutocomplete);
   }, []);
-  
-  $(() => {
-    $('#pat-CPF').mask('000.000.000-00');
-    $('#pat-vr-sessao').mask('#.###.##0,00', { reverse: true });
-  });
 
   const handleSelectDays = (event, values) => {
     if (values.length == 0) document.querySelector('#pat-days').setCustomValidity('Selecione ao menos um dia')
@@ -53,6 +43,15 @@ function FieldsetPatient(attr) {
     setValorSessao(event.target.value);
     Intermediate.setValorSessao(event.target.value);
   }
+
+  const handleChange = (event) => {
+    setMes(event.target.value);
+  };
+  
+  $(() => {
+    $('#pat-CPF').mask('000.000.000-00');
+    $('#pat-vr-sessao').mask('#.###.##0,00', { reverse: true });
+  });
 
   return (
     <fieldset style={{textAlign: 'left'}}>
@@ -81,13 +80,14 @@ function FieldsetPatient(attr) {
           )}
         />
 
+        {/* TODO - Recuperar mês selecionado */}
         <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-helper-label">Mês*</InputLabel>
+        <InputLabel id="pat-mes-sessao-label">Mês*</InputLabel>
         <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={age}
-          label="Age"
+          labelId="pat-mes-sessao-label"
+          id="pat-mes-sessao"
+          value={mes}
+          label="pat-mes-sessao"
           onChange={handleChange}
         >
           <MenuItem value="">
@@ -106,8 +106,8 @@ function FieldsetPatient(attr) {
           <MenuItem value="10">Novembro</MenuItem>
           <MenuItem value="11">Dezembro</MenuItem>
         </Select>
-      </FormControl>  
-      <TextField id="pat-ano" label="Ano" variant="outlined" value={2024} required={attr.required}/>
+      </FormControl>
+      <TextField id="pat-ano-sessao" label="Ano" variant="outlined" value={ano} onInput={e => setAno(e.target.value)} required={attr.required}/>
       </Box>
     </fieldset>
   );

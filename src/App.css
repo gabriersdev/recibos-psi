@@ -48,3 +48,7 @@ fieldset {
 .read-the-docs {
   color: #888;
 }
+
+.swal2-title{
+  line-height: 1.25 !important;
+}

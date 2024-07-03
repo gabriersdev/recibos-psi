@@ -1,5 +1,6 @@
 // import { useState } from 'react';
 import Button from '@mui/material/Button';
+import Swal from 'sweetalert2'
 
 import FieldsetPatient from './FieldsetPatient';
 import FieldsetPsychologist from './FieldsetPsychologist';
@@ -29,7 +30,26 @@ const handleSubmit = (event) => {
     "pat-name": null,
     "pat-CPF": null,
     "pat-vr-sessao": null,
-    "pat-days": null
+    "pat-days": null,
+    "pat-mes-sessao": null,
+    "pat-ano-sessao": null
+  }
+
+  const altName = {
+    "psi-name": "Nome do psicólogo",
+    "psi-email": "Email do psicólogo",
+    "psi-CPF": "CPF do psicólogo",
+    "psi-CRP": "CRP do psicólogo",
+    "psi-atuacao": "Área de atuação do psicólogo",
+    "psi-tel": "Telefone do psicólogo",
+    "psi-endereco": "Endereço do psicólogo",
+    "psi-nickredes": "Redes sociais do psicólogo",
+    "pat-name": "Nome do paciente",
+    "pat-CPF": "CPF do paciente",
+    "pat-vr-sessao": "Valor da sessão do paciente",
+    "pat-days": "Dias de sessão do paciente",
+    "pat-mes-sessao": "Mês da(s) sessão(s) do paciente",
+    "pat-ano-sessao": "Ano da(s) sessão(s) do paciente"
   }
 
   // Preencher o objeto data com os valores dos campos do formulário
@@ -51,15 +71,27 @@ const handleSubmit = (event) => {
   // Verifica se todos os campos estão preenchidos
   const notFilled = [];
   for (const key in data) {
-    if (data[key] === null || data[key] === '') {
-      notFilled.push(key);
+    if (data[key] === null || data[key] === '' || data[key] === undefined) {
+      notFilled.push(altName[key] || key);
     }
   }
 
-  if (notFilled.length > 0) {
-    alert(`Campos não preenchidos: ${notFilled.join(', ')}!`);
+  if (notFilled.length == 1) {
+    Swal.fire({
+      icon: 'error',
+      title: `${notFilled.join(', ')} não foi preenchido.`,
+      text: `Preencha o campo primeiro`
+    });
+    return;
+  } else if (notFilled.length > 1) {
+    Swal.fire({
+      icon: 'error',
+      title: `${notFilled.join(', ')} não foram preenchidos.`,
+      text: `Preencha os campos primeiro`
+    });
     return;
   }
+
 
   // TODO - Validar campos de CPF
   if (data["psi-CPF"].match(/\d/g).length !== 11) {
@@ -90,6 +122,7 @@ const handleSubmit = (event) => {
     alert('Selecione ao menos um dia para a sessão');
     return;
   } 
+
   // TODO - Ordenar e verificar se dias de sessão fazem sentido
 }
 
