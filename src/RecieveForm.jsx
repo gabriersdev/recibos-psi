@@ -55,13 +55,14 @@ const handleSubmit = (event) => {
   // Preencher o objeto data com os valores dos campos do formulário
   for (const key in data) {
     try {
-      if (key !== 'pat-days') data[key] = document.getElementById(key).value;
+      if (!['pat-days', 'pat-mes-sessao'].includes(key)) data[key] = document.getElementById(key).value;
+      else if (key === 'pat-mes-sessao') {
+        if (Intermediate.getMesSessao() >= 0) data[key] = Intermediate.getMesSessao();
+        else data[key] = null;
+      } 
       else {
-        if (Intermediate.getSelectDays().length > 0) {
-          data["pat-days"] = Intermediate.getSelectDays();
-        } else {
-          data["pat-days"] = null;
-        }
+        if (Intermediate.getSelectDays().length > 0) data["pat-days"] = Intermediate.getSelectDays();
+        else data["pat-days"] = null;
       }
     } catch (error) {
       data[key] = null;
@@ -75,7 +76,7 @@ const handleSubmit = (event) => {
       notFilled.push(altName[key] || key);
     }
   }
-
+  
   if (notFilled.length == 1) {
     Swal.fire({
       icon: 'error',
@@ -91,7 +92,7 @@ const handleSubmit = (event) => {
     });
     return;
   }
-
+  
 
   // TODO - Validar campos de CPF
   if (data["psi-CPF"].match(/\d/g).length !== 11) {

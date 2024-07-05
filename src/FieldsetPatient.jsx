@@ -30,6 +30,9 @@ function FieldsetPatient(attr) {
   const [mes, setMes] = useState(moment().get('month'));
   const [ano, setAno] = useState(moment().get('year'));
   
+  // Set valor do mês na Intermediate
+  Intermediate.setMesSessao(mes);
+
   useEffect(() => {
     setOptions(optionsAutocomplete);
   }, []);
@@ -44,11 +47,12 @@ function FieldsetPatient(attr) {
     Intermediate.setValorSessao(event.target.value);
   }
 
-  const handleChange = (event, values) => {
-    console.log(values);
-    if (values.length == 0) document.querySelector('#pat-mes-sessao').setCustomValidity('Selecione um mês')
-    else document.querySelector('#pat-mes-sessao').setCustomValidity(''); event.preventDefault(); Intermediate.setMesSessao(values);
-    setMes(event.target.value);
+  const handleChange = (event) => {
+    const value = event.target.value;
+    const input = document.querySelector('#pat-mes-sessao').closest('div').nextElementSibling;
+    setMes(value);
+    if (value.length == 0) input.setCustomValidity('Selecione um mês')
+    else input.setCustomValidity(''); event.preventDefault(); Intermediate.setMesSessao(value);
   };
   
   $(() => {
