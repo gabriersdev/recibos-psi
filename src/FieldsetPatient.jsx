@@ -44,7 +44,10 @@ function FieldsetPatient(attr) {
     Intermediate.setValorSessao(event.target.value);
   }
 
-  const handleChange = (event) => {
+  const handleChange = (event, values) => {
+    console.log(values);
+    if (values.length == 0) document.querySelector('#pat-mes-sessao').setCustomValidity('Selecione um mês')
+    else document.querySelector('#pat-mes-sessao').setCustomValidity(''); event.preventDefault(); Intermediate.setMesSessao(values);
     setMes(event.target.value);
   };
   
