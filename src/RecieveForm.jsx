@@ -4,7 +4,6 @@ import Swal from 'sweetalert2'
 
 import FieldsetPatient from './FieldsetPatient';
 import FieldsetPsychologist from './FieldsetPsychologist';
-// import FieldsetRecieve from './FieldsetRecieve';
 
 // import $ from 'jquery';
 import 'jquery-mask-plugin';
@@ -93,8 +92,7 @@ const handleSubmit = (event) => {
     return;
   }
   
-
-  // TODO - Validar campos de CPF
+  // Validar campos de CPF
   if (data["psi-CPF"].match(/\d/g).length !== 11) {
     alert('CPF do psicólogo inválido');
     return;
@@ -103,7 +101,7 @@ const handleSubmit = (event) => {
     return;
   }
 
-  // TODO - Validar campos de valor
+  // Validar campos de valor
   if (data["pat-vr-sessao"].match(/\d/g).length < 3) {
     alert('Valor da sessão inválido');
     return;
@@ -112,19 +110,20 @@ const handleSubmit = (event) => {
     return;
   }
 
-  // TODO - Validar campo de email
+  // Validar campo de email
   if (!Util.validaEmail(data["psi-email"])) {
     alert('Email do psicólogo inválido');
     return;
   }
 
-  // TODO - Validar campo de seleção de dias de sessão
+  // Validar campo de seleção de dias de sessão
   if (data["pat-days"].length === 0) {
     alert('Selecione ao menos um dia para a sessão');
     return;
-  } 
+  }
 
-  // TODO - Ordenar e verificar se dias de sessão fazem sentido
+  document.getElementById('valor-tot').textContent = Util.transformaMoeda(Util.BRLToFloat(data["pat-vr-sessao"]) * data["pat-days"].length);
+  document.querySelector('#modal-form-recibo').showModal();
 }
 
 const required = true;
@@ -137,7 +136,7 @@ export default function RecieveForm(){
       <FieldsetPsychologist required={required}/>
       <FieldsetPatient required={required}/>
       {/* <FieldsetRecieve/> */}
-      <Button type='submit' variant="contained" style={{padding: '1rem', width: '25ch', marginTop: '1rem', float: 'left'}}>IMPRIMIR</Button><br/>
+      <Button type='submit' variant="contained" style={{padding: '1rem', width: '25ch', marginTop: '1rem', float: 'left'}}>ENVIAR</Button><br/>
     </form>
   )
 }
