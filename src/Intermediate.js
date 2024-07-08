@@ -3,6 +3,7 @@ export default class Intermediate {
   static valorSessao = null;
   static reactElementValorTotal = null;
   static mesSessao = null;
+  static valorTotal = null;
 
   static getSelectDays() {
     return Intermediate.selectedDays;
@@ -33,6 +34,14 @@ export default class Intermediate {
   }
 
   static setMesSessao(mes) {
-    Intermediate.mesSessao = mes;
+    Intermediate.mesSessao = ('0' + mes).slice(-2);
+  }
+
+  static getValorTotal() {
+    return Intermediate.valorTotal;
+  }
+
+  static setValorTotal(valor) {
+    Intermediate.valorTotal = valor;
   }
 }

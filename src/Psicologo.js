@@ -7,6 +7,7 @@ export default class Psicologo {
   #atuacao;
   #ocupacao;
   #endereco = {
+    completo: '',
     logradouro: '',
     numero: '',
     complemento: '',
@@ -64,6 +65,8 @@ export default class Psicologo {
   }
 
   getEndereco() {
+    if (this.#endereco.completo) return this.#endereco.completo;
+
     return `${this.#endereco.logradouro}, ${this.#endereco.numero}, ${this.#endereco.complemento}, ${this.#endereco.bairro}, ${this.#endereco.cidade}, ${this.#endereco.estado}, ${this.#endereco.cep}`;
   }
 
@@ -85,5 +88,11 @@ export default class Psicologo {
 
   getCidade() {
     return this.#endereco.cidade;
+  }
+
+  getContato() {
+    if (this.#contato.email && this.#contato.site && this.#contato.nickRede) return `E-mail: ${this.#contato.email} - Site: ${this.#contato.site} - Redes sociais: ${this.#contato.nickRede}`;
+    else if (this.#contato.email && this.#contato.nickRede) return `E-mail: ${this.#contato.email} - Redes sociais: ${this.#contato.nickRede}`;
+    return '';
   }
 }

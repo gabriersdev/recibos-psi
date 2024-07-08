@@ -5,6 +5,7 @@ import './ModalRecieve.css';
 import $ from 'jquery';
 import 'jquery-mask-plugin';
 import Util from './Util';
+import Intermediate from './Intermediate';
 
 function ModalRecieve() {  
   const [valorTotal, setValorTotal] = useState('');
@@ -16,10 +17,10 @@ function ModalRecieve() {
   const handleButton = () => {
     const valor = $('#rec-valor-tot').val();
     if (valor) {
-      $('#valor-tot').text(Util.transformaMoeda(Util.BRLToFloat(valor)));
+      Intermediate.setValorTotal(Util.transformaMoeda(Util.BRLToFloat(valor)))
+      $('#valor-tot').text(Intermediate.getValorTotal());
     }
   }
-
 
   return (
     <dialog id='modal-form-recibo'>

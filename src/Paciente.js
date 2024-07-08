@@ -1,4 +1,4 @@
-export default class Usuario {
+export default class Paciente {
   static #countID = 0;
   #id;
   #nome;
@@ -8,14 +8,14 @@ export default class Usuario {
   #datasSecoes = [];
 
   /**
-   * Construtor da classe Usuario
+   * Construtor da classe Paciente
    * @param {string} nome
    * @param {string} CPF
    * @param {number} valorConsulta
    * @param {Array} datasSecoes
    */
   constructor(nome, CPF, valorConsulta, datasSecoes) {
-    this.#id = Usuario.#countID++;
+    this.#id = Paciente.#countID++;
     this.#nome = nome;
     this.#CPF = CPF;
     this.#valorConsulta = valorConsulta;

@@ -10,13 +10,17 @@ import 'jquery-mask-plugin';
 import Intermediate from './Intermediate';
 
 import Util from './Util';
+import moment from 'moment';
+
+import Psicologo from './Psicologo';
+import Paciente from './Paciente';
+import Recibo from './Recibo';
 
   // Recieve
 const handleSubmit = (event) => { 
   event.preventDefault();
   // Aqui você pode lidar com a submissão do formulário
-  console.log('Formulário enviado');
-
+  
   const data = {
     "psi-name": null,
     "psi-email": null,
@@ -120,10 +124,27 @@ const handleSubmit = (event) => {
   if (data["pat-days"].length === 0) {
     alert('Selecione ao menos um dia para a sessão');
     return;
+  } else {
+    data["pat-days"] = data["pat-days"].map((d) => `${d.value}/${data["pat-mes-sessao"]}/${data["pat-ano-sessao"]}`);
   }
 
-  document.getElementById('valor-tot').textContent = Util.transformaMoeda(Util.BRLToFloat(data["pat-vr-sessao"]) * data["pat-days"].length);
+  Intermediate.setValorTotal(Util.transformaMoeda(Util.BRLToFloat(data["pat-vr-sessao"]) * data["pat-days"].length));
+  document.getElementById('valor-tot').textContent = Intermediate.getValorTotal();
   document.querySelector('#modal-form-recibo').showModal();
+
+  // Submit form modal
+  const form = document.querySelector('#modal-form-recibo form');
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    
+    const psicologo = new Psicologo(data["psi-name"], data["psi-CPF"], data["psi-CRP"], data["psi-atuacao"], 'Psicólogo', {completo: data["psi-endereco"]}, {email: data["psi-email"], telefone: data["psi-tel"], nickRede: data["psi-nickredes"]});
+
+    const paciente = new Paciente(data["pat-name"], data["pat-CPF"], Util.BRLToFloat(data["pat-vr-sessao"]), data["pat-days"]);
+
+    const recibo = new Recibo(paciente, Intermediate.getValorTotal(), new moment(), psicologo);
+
+    console.log(recibo.renderRecibo());
+  })
 }
 
 const required = true;
