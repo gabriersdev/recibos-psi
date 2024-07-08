@@ -43,6 +43,7 @@ export default class Recibo {
     return this.#dataEmissao;
   }
 
+  // TODO - Alterar para retornar o valor total formatado para o PDFMake
   renderRecibo() {
     console.log(this.#paciente.getDataSecoes());
     return `

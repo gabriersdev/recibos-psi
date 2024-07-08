@@ -16,6 +16,10 @@ import Psicologo from './Psicologo';
 import Paciente from './Paciente';
 import Recibo from './Recibo';
 
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
   // Recieve
 const handleSubmit = (event) => { 
   event.preventDefault();
@@ -132,6 +136,7 @@ const handleSubmit = (event) => {
   document.getElementById('valor-tot').textContent = Intermediate.getValorTotal();
   document.querySelector('#modal-form-recibo').showModal();
 
+  // TODO - Organizar código e responsabilidade
   // Submit form modal
   const form = document.querySelector('#modal-form-recibo form');
   form.addEventListener('submit', (event) => {
@@ -143,7 +148,26 @@ const handleSubmit = (event) => {
 
     const recibo = new Recibo(paciente, Intermediate.getValorTotal(), new moment(), psicologo);
 
-    console.log(recibo.renderRecibo());
+    // TODO - Gerar PDF do recibo
+    pdfMake.createPdf({
+      content: [
+        { text: 'This is a header', style: 'header' },
+        'No styling here, this is a standard paragraph',
+        { text: 'Another text', style: 'anotherStyle' },
+        { text: 'Multiple styles applied', style: [ 'header', 'anotherStyle' ] }
+      ],
+    
+      styles: {
+        header: {
+          fontSize: 22,
+          bold: true
+        },
+        anotherStyle: {
+          italics: true,
+          alignment: 'right'
+        }
+      }
+    }).print();
   })
 }
 
