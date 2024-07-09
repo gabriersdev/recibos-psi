@@ -151,12 +151,10 @@ const handleSubmit = (event) => {
     // TODO - Gerar PDF do recibo
     pdfMake.createPdf({
       content: [
-        { text: 'This is a header', style: 'header' },
-        'No styling here, this is a standard paragraph',
-        { text: 'Another text', style: 'anotherStyle' },
-        { text: 'Multiple styles applied', style: [ 'header', 'anotherStyle' ] }
+        // { text: texto, style: 'className' || [ 'className1', 'className2' ] }
       ],
-    
+      
+      // Styles
       styles: {
         header: {
           fontSize: 22,
