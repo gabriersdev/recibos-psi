@@ -56,7 +56,38 @@ export default class Util{
   }
 
   static transformaData(data, transform) {
-    if (transform === 'e') return `${new moment(data).get('date')} de ${new moment(data).locale('pt-br').format('MMMM')} de ${new moment(data).get('year')}`;
+    // TODO - Convert name of months to pt-br
+    const converterParaMesBRL = (numero) => {
+      try {
+        const numero_parsed = parseInt(numero, 10);
+        if (typeof numero_parsed === 'number') {
+          let mes = null;
+          switch (numero_parsed) {
+            case 1: mes = 'janeiro'; break;
+            case 2: mes = 'fevereiro'; break;
+            case 3: mes = 'março'; break;
+            case 4: mes = 'abril'; break;
+            case 5: mes = 'maio'; break;
+            case 6: mes = 'junho'; break;
+            case 7: mes = 'julho'; break;
+            case 8: mes = 'agosto'; break;
+            case 9: mes = 'setembro'; break;
+            case 10: mes = 'outubro'; break;
+            case 11: mes = 'novembro'; break;
+            case 12: mes = 'dezembro'; break;
+            default: mes = 'janeiro'; break;
+          }
+    
+          return mes;
+        }
+        return null;
+      } catch (error) {
+        console.warn('O valor informado não é um número');
+        return null;
+      }
+    };
+
+    if (transform === 'e') return `${new moment(data).get('date')} de ${converterParaMesBRL(new moment(data).format('MM'))} de ${new moment(data).get('year')}`;
     return new moment(data).format('DD/MM/YYYY');
   }
 
