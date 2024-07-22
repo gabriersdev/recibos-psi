@@ -18,6 +18,8 @@ import Recibo from './Recibo';
 
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import 'pdfmake/build/vfs_fonts';
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
   // Recieve
@@ -151,7 +153,7 @@ const handleSubmit = (event) => {
     // TODO - Set fonts PDK Make
     // DOC https://pdfmake.github.io/docs/0.1/fonts/custom-fonts-client-side/url/
 
-    // TODO - Gerar PDF do recibo
+    // Gerar PDF do recibo
     pdfMake.createPdf({
       content: recibo.renderRecibo(),
       
@@ -165,7 +167,7 @@ const handleSubmit = (event) => {
           fontSize: 22,
           bold: true
         },
-      }
+      },
     }).print();
   })
 }
