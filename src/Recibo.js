@@ -43,23 +43,21 @@ export default class Recibo {
     return this.#dataEmissao;
   }
 
-  // TODO - Alterar para retornar o valor total formatado para o PDFMake
+  // Retorna um array com os dados do recibo formatados para serem renderizados no PDF
   renderRecibo() {
-    console.log(this.#paciente.getDataSecoes());
-    return `
-      Recebi de <b>${this.#paciente.getNome()}</b>, CPF: <b>${this.#paciente.getCPF()}</b>, a quantia de R$ <b>${Util.transformaMoeda(this.#valorTotal)}</b> referente a ${this.#paciente.getQuantidadeSecoes() > 0 ? this.#paciente.getQuantidadeSecoes() + ' sessões de terapia realizadas no período de ' + this.#paciente.getDataSecoes().map((d) => d) : '1 sessão de terapia realizada no dia de ' + this.#paciente.getDataSecoes()[0]}.
-
-      ${this.#psicologo.getCidade() ?? 'Brasil'}, ${Util.transformaData(this.#dataEmissao, 'e')}
-
-      <br><br><br>
-      <b>${this.#psicologo.getNome()}</b>
-      CRP: ${this.#psicologo.getCRP()}
-      CPF: ${this.#psicologo.getCPF()}
-
-      <br><br><br>
-      ${this.#psicologo.getEndereco()}
-      ${this.#psicologo.getNome()} - ${this.#psicologo.getAtuacao()} - ${this.#psicologo.getTelefone()}
-      ${this.#psicologo.getContato()}
-    `
+    // { text: '  '} - Space
+    return [
+      { text: 'RECIBO', style: 'header', alignment: 'center' }, { text: '  '}, { text: '  '},
+      {
+        text: `Recebi de ${this.#paciente.getNome()}, CPF: ${this.#paciente.getCPF()}, a quantia de R$ ${Util.transformaMoeda(this.#valorTotal)} referente a ${this.#paciente.getQuantidadeSecoes() > 1 ? this.#paciente.getQuantidadeSecoes() + ' sessões de terapia realizadas no período de ' + this.#paciente.getDataSecoes().map((d) => d) : '1 sessão de terapia realizada no dia de ' + this.#paciente.getDataSecoes()[0]}.`
+      }, { text: '  '}, { text: '  '},
+      { text: `${this.#psicologo.getCidade() ?? 'Brasil'}, ${Util.transformaData(this.#dataEmissao, 'e')}`}, { text: ' '}, { text: '  '},
+      { text: `${this.#psicologo.getNome()}` },
+      { text: `CRP: ${this.#psicologo.getCRP()} `},
+      { text: `CPF: ${this.#psicologo.getCPF()}` }, { text: '  '}, { text: '  '},
+      { text: this.#psicologo.getEndereco() || '' },
+      { text: `${this.#psicologo.getNome()} - ${this.#psicologo.getAtuacao()} - ${this.#psicologo.getTelefone()}` },
+      { text: `${this.#psicologo.getContato()}}` }
+    ].map((item) => { !item.style ? item.style = 'default' : ''; return item });
   }
 }

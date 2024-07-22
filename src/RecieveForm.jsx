@@ -148,22 +148,23 @@ const handleSubmit = (event) => {
 
     const recibo = new Recibo(paciente, Intermediate.getValorTotal(), new moment(), psicologo);
 
+    // TODO - Set fonts PDK Make
+    // DOC https://pdfmake.github.io/docs/0.1/fonts/custom-fonts-client-side/url/
+
     // TODO - Gerar PDF do recibo
     pdfMake.createPdf({
-      content: [
-        // { text: texto, style: 'className' || [ 'className1', 'className2' ] }
-      ],
+      content: recibo.renderRecibo(),
       
       // Styles
       styles: {
+        default: {
+          fontSize: 16,
+          bold: false
+        },
         header: {
           fontSize: 22,
           bold: true
         },
-        anotherStyle: {
-          italics: true,
-          alignment: 'right'
-        }
       }
     }).print();
   })
