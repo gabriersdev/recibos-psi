@@ -6,22 +6,26 @@ import Util from './Util';
 
 import $ from "jquery";
 import 'jquery-mask-plugin'; 
+import Intermediate from './Intermediate';
 
-  // const handleSubmit = (event) => {
+
+// const handleSubmit = (event) => {
   //   event.preventDefault();
   //   // Aqui você pode lidar com a submissão do formulário
   //   console.log({ name, email, phone, atuacao, CRP, CPF, endereco, nickRedes});
   // };
-
-const FieldsetPsychologist = (attr) => {
-  const [name, setName] = useState('Ricardo');
-  const [email, setEmail] = useState('ricardo@mail.com');
-  const [phone, setPhone] = useState('(31) 99999-9999');
-  const [atuacao, setAtuacao] = useState('Psicólogo clínico');
-  const [CRP, setCRP] = useState('123456');
-  const [CPF, setCPF] = useState('123.456.789-09');
-  const [endereco, setEndereco] = useState('Rua dos Bobos, nº 0, Bairro dos Bobos, Cidade dos Bobos, Estado dos Bobos, CEP: 12345-678');
-  const [nickRedes, setNickRedes] = useState('@ricardo_psicologo');
+  
+  const FieldsetPsychologist = (attr) => {
+  const Int = new Intermediate();
+  
+  const [name, setName] = useState(Int.getValue('psychologist', 'name'));
+  const [email, setEmail] = useState(Int.getValue('psychologist', 'email'));
+  const [phone, setPhone] = useState(Int.getValue('psychologist', 'phone'));
+  const [atuacao, setAtuacao] = useState(Int.getValue('psychologist', 'atuacao'));
+  const [CRP, setCRP] = useState(Int.getValue('psychologist', 'CRP'));
+  const [CPF, setCPF] = useState(Int.getValue('psychologist', 'CPF'));
+  const [endereco, setEndereco] = useState(Int.getValue('psychologist', 'endereco'));
+  const [nickRedes, setNickRedes] = useState(Int.getValue('psychologist', 'nickRedes'));
 
   $(() => {
     $('#psi-CPF').mask('000.000.000-00');
