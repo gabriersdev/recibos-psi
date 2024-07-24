@@ -17,8 +17,8 @@ import Paciente from './Paciente';
 import Recibo from './Recibo';
 
 import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import font from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = font;
 
   // Recieve
 const handleSubmit = (event) => { 
