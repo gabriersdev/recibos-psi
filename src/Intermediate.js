@@ -7,7 +7,7 @@ export default class Intermediate {
 
   // TODO Separar em uma class de armaenamento de dados
   // 0 - Desenvolvimento | 1 - Produção
-  modo = 1;
+  modo = 0;
 
   valoresTeste = {
     patient: {
