@@ -32,8 +32,9 @@ function ModalRecieve() {
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.25rem'}}>
           <Input id="rec-valor-tot" label="Valor total" variant="outlined" value={valorTotal} onInput={e => setValorTotal(e.target.value)} style={{width: '75ch'}} required={false} placeholder='Novo valor total'/>
           <Button onClick={handleButton}>Alterar</Button>
-        </div><br/>
-        <Button type='submit' variant="contained" style={{padding: '1rem', width: '25ch', marginTop: '1rem', float: 'left'}}>IMPRIMIR</Button><br/>
+        </div><br />
+        <Button type='submit' variant="contained" style={{padding: '1rem', width: '25ch', marginTop: '1rem', float: 'left'}}>IMPRIMIR</Button>
+        <Button type='button' variant="outlined" style={{padding: '1rem', width: '25ch', marginTop: '1rem', marginLeft: '1rem', float: 'left'}} onClick={(e) => e.target.closest('dialog').close()}>FECHAR</Button>
       </form>
     </dialog>
   );
