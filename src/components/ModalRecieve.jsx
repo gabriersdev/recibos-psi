@@ -1,11 +1,11 @@
+import '../styles/ModalRecieve.css';
+import Util from '../class/Util';
+import Intermediate from '../class/Intermediate';
+
 import { useState } from 'react';
 import { Button, Input } from '@mui/material';
-import './ModalRecieve.css';
-
 import $ from 'jquery';
 import 'jquery-mask-plugin';
-import Util from './Util';
-import Intermediate from './Intermediate';
 
 function ModalRecieve() {  
   const [valorTotal, setValorTotal] = useState('');

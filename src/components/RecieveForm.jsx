@@ -2,19 +2,19 @@
 import Button from '@mui/material/Button';
 import Swal from 'sweetalert2'
 
-import FieldsetPatient from './FieldsetPatient';
-import FieldsetPsychologist from './FieldsetPsychologist';
+import FieldsetPatient from '../FieldsetPatient';
+import FieldsetPsychologist from '../FieldsetPsychologist';
 
 // import $ from 'jquery';
 import 'jquery-mask-plugin';
-import Intermediate from './Intermediate';
+import Intermediate from '../Intermediate';
 
-import Util from './Util';
+import Util from '../class/Util';
 import moment from 'moment';
 
-import Psicologo from './Psicologo';
-import Paciente from './Paciente';
-import Recibo from './Recibo';
+import Psicologo from '../class/Psicologo';
+import Paciente from '../class/Paciente';
+import Recibo from '../Recibo';
 
 import pdfMake from "pdfmake/build/pdfmake";
 

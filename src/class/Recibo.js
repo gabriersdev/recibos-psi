@@ -1,5 +1,5 @@
-import Paciente from './Paciente.js';
-import Psicologo from './Psicologo.js';
+import Paciente from './class/Paciente.js';
+import Psicologo from './class/Psicologo.js';
 import Util from './Util.js';
 
 export default class Recibo {

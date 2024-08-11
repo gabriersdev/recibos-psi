@@ -1,8 +1,8 @@
-import './App.css'
+import './styles/App.css'
+import RecieveForm from './components/RecieveForm';
+import ModalRecieve from './components/ModalRecieve';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import RecieveForm from './RecieveForm';
-import ModalRecieve from './ModalRecieve';
 
 const theme = createTheme({
   typography: {
