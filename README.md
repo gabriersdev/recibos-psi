@@ -27,8 +27,8 @@ Este projeto é uma aplicação web para gerar recibos de pagamento para psicól
 1. **Clone o repositório:**
 
    ```sh
-   git clone https://github.com/seu-usuario/gerador-recibos-psicologos.git
-   cd gerador-recibos-psicologos
+   git clone https://github.com/gabriersdev/recibos-psi.git
+   cd recibos-psi
    ```
 
 2. **Instale as dependências:**
@@ -43,33 +43,42 @@ Este projeto é uma aplicação web para gerar recibos de pagamento para psicól
    npm start
    ```
 
-   A aplicação estará disponível em `http://localhost:3000`.
+   A aplicação estará disponível em `http://localhost:5173/` (a porta pode mudar dependendo do seu sistema operacional ou das configurações na instalação).
 
 ## Estrutura do Projeto
 
 ```
-gerador-recibos-psicologos/
+recibos-psi/
 ├── public/
 ├── src/
 │   ├── components/
-│   │   ├── ReceiptForm.js
-│   │   ├── ReceiptPreview.js
+│   │   ├── FieldsetPatient.jsx
+│   │   ├── FieldsetPsychologist.jsx
+│   │   ├── ModalRecieve.jsx
+│   │   ├── ReceiptForm.jsx
 │   ├── styles/
-│   ├── App.js
-│   ├── index.js
-│   └── ...
+│   │   ├── App.css
+│   │   ├── index.css
+│   │   ├── ModalRecieve.css
+│   ├── App.jsx
+│   ├── index.jsx
 ├── .gitignore
+├── .eslintrc.cjs
+└── index.html
 ├── package.json
+├── package-lock.json
 ├── README.md
-└── ...
+└── vite.config.js
+└── yarn.lock
 ```
 
 ## Como Usar
 
-1. **Preencha as informações do paciente**: Nome, CPF, telefone, etc.
+1. **Preencha as informações do paciente e psicólogo**: Nome, CPF, telefone, etc.
 2. **Insira os detalhes da sessão**: Data, descrição, valor pago.
-3. **Gere o recibo**: Clique no botão para gerar o recibo em formato PDF.
-4. **Baixe ou imprima o recibo**: O recibo gerado estará disponível para download ou impressão.
+3. **Gere o recibo**: Clique no botão para confirmar.
+4. **Confirme o valor total**: Altere se desejar e depois clique no botão de imprimir.
+5. **Baixe ou imprima o recibo**: O recibo gerado estará disponível para download ou impressão.
 
 ## Contribuição
 
@@ -79,10 +88,6 @@ gerador-recibos-psicologos/
 4. **Faça um push para a branch** (`git push origin feature/nova-feature`)
 5. **Crie um novo Pull Request**
 
-## Licença
-
-Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
 ---
 
-Feito com ♥ por [Seu Nome](https://github.com/seu-usuario)
+Feito com ♥ por [Gabriel](https://github.com/gabriersdev)
