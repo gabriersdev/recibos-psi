@@ -152,6 +152,25 @@ const handleSubmit = (event) => {
     
     const psicologo = new Psicologo(data["psi-name"], data["psi-CPF"], data["psi-CRP"], data["psi-atuacao"], 'Psicólogo', {completo: data["psi-endereco"]}, {email: data["psi-email"], telefone: data["psi-tel"], nickRede: data["psi-nickredes"]});
 
+    // Salvando localmente dados do piscologo
+    try {
+      let saved;
+
+      try {
+        saved = JSON.parse(localStorage.getItem('recibos-psi'));
+      } catch (error) {
+        localStorage.setItem('recibos-psi', JSON.stringify({}));
+        saved = JSON.parse(localStorage.getItem('recibos-psi'));
+      }
+
+      if (saved && Object.is(saved) && Object.getOwnPropertyNames(saved).length > 0) {
+        saved.psycologist = psicologo.toJSON();
+      }
+    } catch (error) {
+      alert('Falha ao salvar localmente os dados do psicólogo');
+      throw new Error('Falha ao salvar localmente os dados do psicólogo. ' + error);
+    }
+
     const paciente = new Paciente(data["pat-name"], data["pat-CPF"], Util.BRLToFloat(data["pat-vr-sessao"]), data["pat-days"]);
 
     const recibo = new Recibo(paciente, Intermediate.getValorTotal(), new moment(), psicologo);
