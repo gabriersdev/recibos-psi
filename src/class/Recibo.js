@@ -49,7 +49,7 @@ export default class Recibo {
     return [
       { text: 'RECIBO', style: 'header', alignment: 'center' }, { text: '  '}, { text: '  '},
       {
-        text: `Recebi de ${this.#paciente.getNome()}, CPF: ${this.#paciente.getCPF()}, a quantia de R$ ${Util.transformaMoeda(this.#valorTotal)} referente a ${this.#paciente.getQuantidadeSecoes() > 1 ? this.#paciente.getQuantidadeSecoes() + ' sessões de terapia realizadas no período de ' + this.#paciente.getDataSecoes().map((d) => d) : '1 sessão de terapia realizada no dia de ' + this.#paciente.getDataSecoes()[0]}.`
+        text: `Recebi de ${this.#paciente.getNome()}, CPF: ${this.#paciente.getCPF()}, a quantia de R$ ${Util.transformaMoeda(this.#valorTotal)} referente a ${this.#paciente.getQuantidadeSecoes() > 1 ? this.#paciente.getQuantidadeSecoes() + ' sessões de terapia realizadas no período de ' + this.#paciente.getDataSecoes().join(', ') : '1 sessão de terapia realizada no dia de ' + this.#paciente.getDataSecoes()[0]}.`
       }, { text: '  '}, { text: '  '},
       { text: `${this.#psicologo.getCidade() ?? 'Brasil'}, ${Util.transformaData(this.#dataEmissao, 'e')}`}, { text: ' '}, { text: '  '},
       { text: `${this.#psicologo.getNome()}` },

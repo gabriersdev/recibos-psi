@@ -43,7 +43,7 @@ export default class Paciente {
   }
 
   getDataSecoes() {
-    return this.#datasSecoes;
+    return this.#datasSecoes.sort((a, b) => a.localeCompare(b));
   }
 
   getQuantidadeSecoes() {

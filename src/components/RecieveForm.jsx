@@ -10,23 +10,6 @@ import 'jquery-mask-plugin';
 import Intermediate from '../class/Intermediate';
 
 import Util from '../class/Util';
-import moment from 'moment';
-
-import Psicologo from '../class/Psicologo';
-import Paciente from '../class/Paciente';
-import Recibo from '../class/Recibo';
-
-import pdfMake from "pdfmake/build/pdfmake";
-
-pdfMake.fonts = {
-  // download default Roboto font from cdnjs.com
-  Roboto: {
-    normal: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Regular.ttf',
-    bold: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Medium.ttf',
-    italics: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Italic.ttf',
-    bolditalics: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-MediumItalic.ttf'
-  },
-}
 
   // Recieve
 const handleSubmit = (event) => { 
@@ -144,65 +127,8 @@ const handleSubmit = (event) => {
   document.getElementById('valor-tot').textContent = Intermediate.getValorTotal();
   document.querySelector('#modal-form-recibo').showModal();
 
-  // TODO - Organizar código e responsabilidade
-  // Submit form modal
-  const form = document.querySelector('#modal-form-recibo form');
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    
-    const psicologo = new Psicologo(data["psi-name"], data["psi-CPF"], data["psi-CRP"], data["psi-atuacao"], 'Psicólogo', {completo: data["psi-endereco"]}, {email: data["psi-email"], telefone: data["psi-tel"], nickRede: data["psi-nickredes"]});
-
-    // Salvando localmente dados do piscologo
-    try {
-      let saved = {};
-
-      try {
-        // saved = JSON.parse(localStorage.getItem('recibos-psi'));
-      } catch (error) {
-        // localStorage.setItem('recibos-psi', JSON.stringify({}));
-        // saved = JSON.parse(localStorage.getItem('recibos-psi'));
-      }
-
-      if (saved && typeof saved === "object") {
-        saved.psychologist = psicologo.toJSON();
-        console.log(saved.psychologist);
-      }
-
-      localStorage.setItem('recibos-psi', JSON.stringify(saved))
-
-    } catch (error) {
-      alert('Falha ao salvar localmente os dados do psicólogo');
-      throw new Error('Falha ao salvar localmente os dados do psicólogo. ' + error);
-    }
-
-    const paciente = new Paciente(data["pat-name"], data["pat-CPF"], Util.BRLToFloat(data["pat-vr-sessao"]), data["pat-days"]);
-
-    const recibo = new Recibo(paciente, Intermediate.getValorTotal(), new moment(), psicologo);
-
-    // TODO - Set fonts PDK Make
-    // DOC https://pdfmake.github.io/docs/0.1/fonts/custom-fonts-client-side/url/
-
-    // Gerar PDF do recibo
-    pdfMake.createPdf({
-      content: recibo.renderRecibo(),
-      
-      // Styles
-      styles: {
-        default: {
-          fontSize: 16,
-          bold: false
-        },
-        header: {
-          fontSize: 22,
-          bold: true
-        },
-      },
-
-      defaultStyle: {
-        font: 'Roboto'
-      }
-    }).download(`Recibo ${paciente.getCPF().replace(/\D/gi, '') || '#'} - ${Util.transformaData(recibo.getDataEmissao(), 's')}.pdf`);
-  })
+  Intermediate.setData(data);
+  return;
 }
 
 const required = true;

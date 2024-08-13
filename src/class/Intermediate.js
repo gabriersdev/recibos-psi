@@ -7,6 +7,9 @@ export default class Intermediate {
   static mesSessao = null;
   static valorTotal = null;
 
+  // Para confirmação e impressão
+  static data;
+
   // TODO Separar em uma class de armaenamento de dados
   // 0 - Desenvolvimento | 1 - Produção
   modo = 0;
@@ -53,7 +56,14 @@ export default class Intermediate {
 
       // Altera nomes das propriedades para corresponder ao preench dos inputs
       if (rec) {
-        const psychologist = JSON.parse(rec.psychologist);
+        let psychologist;
+
+        try {
+          psychologist = JSON.parse(rec.psychologist)
+        } catch (error) {
+          psychologist = rec.psychologist
+        }
+
         this.valoresSalvos.psychologist = {
           name: psychologist.nome || '',
           email: psychologist.contato.email || '',
@@ -70,7 +80,7 @@ export default class Intermediate {
       }
 
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       localStorage.setItem('recibos-psi', JSON.stringify({}));
       return null;
     }
@@ -115,7 +125,7 @@ export default class Intermediate {
   }
 
   static getMesSessao() {
-    return Intermediate.mesSessao;
+    return `0${parseInt(Intermediate.mesSessao) + 1}`.slice(-2);
   }
 
   static setMesSessao(mes) {
@@ -128,5 +138,13 @@ export default class Intermediate {
 
   static setValorTotal(valor) {
     Intermediate.valorTotal = valor;
+  }
+
+  static setData(data) {
+    Intermediate.data = data
+  }
+
+  static getData() {
+    return Intermediate.data;
   }
 }

@@ -103,8 +103,8 @@ export default class Psicologo {
     return '';
   }
 
-  toJSON() {
-    return JSON.stringify({
+  toSave() {
+    return {
       id: this.#id,
       nome: this.#nome,
       CPF: this.#CPF,
@@ -113,11 +113,10 @@ export default class Psicologo {
       ocupacao: this.#ocupacao,
       endereco: this.#endereco,
       contato: this.#contato
-    })
+    }
   }
 
-  static JSONtoInstance(data) {
-    const json = JSON.parse(data);
+  static JSONtoInstance(json) {
     return new Psicologo(
       json.nome || '',
       json.CPF || '',
