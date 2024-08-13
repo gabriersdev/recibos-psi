@@ -201,7 +201,7 @@ const handleSubmit = (event) => {
       defaultStyle: {
         font: 'Roboto'
       }
-    }).print();
+    }).download(`Recibo ${paciente.getCPF().replace(/\D/gi, '') || '#'} - ${Util.transformaData(recibo.getDataEmissao(), 's')} .pdf`);
   })
 }
 

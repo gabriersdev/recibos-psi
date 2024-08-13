@@ -88,6 +88,7 @@ export default class Util{
     };
 
     if (transform === 'e') return `${new moment(data).get('date')} de ${converterParaMesBRL(new moment(data).format('MM'))} de ${new moment(data).get('year')}`;
+    else if (transform === 's') return moment(data).format('MM.YYYY');
     return new moment(data).format('DD/MM/YYYY');
   }
 

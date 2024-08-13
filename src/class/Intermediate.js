@@ -1,3 +1,5 @@
+import Psicologo from "./Psicologo";
+
 export default class Intermediate {
   static selectedDays = [];
   static valorSessao = null;
@@ -7,7 +9,7 @@ export default class Intermediate {
 
   // TODO Separar em uma class de armaenamento de dados
   // 0 - Desenvolvimento | 1 - Produção
-  modo = 1;
+  modo = 0;
 
   valoresTeste = {
     patient: {
@@ -62,6 +64,9 @@ export default class Intermediate {
           endereco: psychologist.endereco.completo || '',
           nickRedes: psychologist.contato.nickRede || ''
         }
+
+        // Obtendo instância da class Psicólogo com dados recuperados
+        const instance =  Psicologo.JSONtoInstance(psychologist);
       }
 
     } catch (error) {
