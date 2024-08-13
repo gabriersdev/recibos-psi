@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import TextField from "@mui/material/TextField";
 import Box from '@mui/material/Box';
-import Util from './Util';
+import Util from '../class/Util';
 
 import $ from "jquery";
 import 'jquery-mask-plugin'; 
@@ -10,7 +10,7 @@ import 'jquery-mask-plugin';
 import moment from "moment";
 import { useEffect } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
-import Intermediate from './Intermediate';
+import Intermediate from '../class/Intermediate';
 
 // Imports para Select
 import InputLabel from '@mui/material/InputLabel';

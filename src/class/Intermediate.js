@@ -1,5 +1,3 @@
-import Psicologo from "./Psicologo";
-
 export default class Intermediate {
   static selectedDays = [];
   static valorSessao = null;
@@ -9,7 +7,7 @@ export default class Intermediate {
 
   // TODO Separar em uma class de armaenamento de dados
   // 0 - Desenvolvimento | 1 - Produção
-  modo = 0;
+  modo = 1;
 
   valoresTeste = {
     patient: {
@@ -29,7 +27,13 @@ export default class Intermediate {
     }
   }
 
-  valoresSalvos = {}
+  valoresSalvos = {
+    patient: {
+      name: '',
+      CPF: '',
+      valorSessao: '',
+    },
+  }
 
   // Verificando e capturando dados salvos em localStorage
   // TODO - isso não fica bom aqui
@@ -38,14 +42,30 @@ export default class Intermediate {
 
     try {
       saved = JSON.parse(localStorage.getItem('recibos-psi'));
+      let rec;
       
-      if (saved && Object.is(saved) && Object.getOwnPropertyNames(saved).length > 0) {
-        // TODO - transformar propriedades da class criada em propriedades do objeto que são usadas nos formulários
-        if (saved.psychologist) return Psicologo.JSONtoInstance();
-        else return null;
+      if (saved && Object.getOwnPropertyNames(saved).length > 0) {
+        if (saved.psychologist) rec = saved;
+        else rec = null;
+      }
+
+      // Altera nomes das propriedades para corresponder ao preench dos inputs
+      if (rec) {
+        const psychologist = JSON.parse(rec.psychologist);
+        this.valoresSalvos.psychologist = {
+          name: psychologist.nome || '',
+          email: psychologist.contato.email || '',
+          phone: psychologist.contato.telefone || '',
+          atuacao: psychologist.atuacao || '',
+          CRP: psychologist.CRP || '',
+          CPF: psychologist.CPF || '',
+          endereco: psychologist.endereco.completo || '',
+          nickRedes: psychologist.contato.nickRede || ''
+        }
       }
 
     } catch (error) {
+      // console.log(error);
       localStorage.setItem('recibos-psi', JSON.stringify({}));
       return null;
     }
@@ -53,8 +73,12 @@ export default class Intermediate {
 
   getValue(user, key) {
     if (this.modo === 1) {
-      // TODO Implementar a lógica para pegar os valores do localStorage
-      return '';
+      try {
+        return this.valoresSalvos[user][key]
+      } catch (error) {
+        // console.log(error);
+        return '';
+      }
     } else {
       try { return this.valoresTeste[user][key];
       } catch (error) { console.log(error); return ''; }

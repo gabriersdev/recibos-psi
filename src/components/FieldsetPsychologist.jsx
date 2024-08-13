@@ -2,11 +2,11 @@ import { useState } from 'react';
 import TextField from "@mui/material/TextField";
 import Box from '@mui/material/Box';
 // import Button from '@mui/material/Button';
-import Util from './Util';
+import Util from '../class/Util';
 
 import $ from "jquery";
 import 'jquery-mask-plugin'; 
-import Intermediate from './Intermediate';
+import Intermediate from '../class/Intermediate';
 
 
 // const handleSubmit = (event) => {
@@ -17,6 +17,7 @@ import Intermediate from './Intermediate';
   
   const FieldsetPsychologist = (attr) => {
   const Int = new Intermediate();
+  Int.verificarDadosSalvos();
   
   const [name, setName] = useState(Int.getValue('psychologist', 'name'));
   const [email, setEmail] = useState(Int.getValue('psychologist', 'email'));

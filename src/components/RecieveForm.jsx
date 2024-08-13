@@ -2,19 +2,19 @@
 import Button from '@mui/material/Button';
 import Swal from 'sweetalert2'
 
-import FieldsetPatient from '../FieldsetPatient';
-import FieldsetPsychologist from '../FieldsetPsychologist';
+import FieldsetPatient from './FieldsetPatient';
+import FieldsetPsychologist from './FieldsetPsychologist';
 
 // import $ from 'jquery';
 import 'jquery-mask-plugin';
-import Intermediate from '../Intermediate';
+import Intermediate from '../class/Intermediate';
 
 import Util from '../class/Util';
 import moment from 'moment';
 
 import Psicologo from '../class/Psicologo';
 import Paciente from '../class/Paciente';
-import Recibo from '../Recibo';
+import Recibo from '../class/Recibo';
 
 import pdfMake from "pdfmake/build/pdfmake";
 
@@ -154,18 +154,22 @@ const handleSubmit = (event) => {
 
     // Salvando localmente dados do piscologo
     try {
-      let saved;
+      let saved = {};
 
       try {
-        saved = JSON.parse(localStorage.getItem('recibos-psi'));
+        // saved = JSON.parse(localStorage.getItem('recibos-psi'));
       } catch (error) {
-        localStorage.setItem('recibos-psi', JSON.stringify({}));
-        saved = JSON.parse(localStorage.getItem('recibos-psi'));
+        // localStorage.setItem('recibos-psi', JSON.stringify({}));
+        // saved = JSON.parse(localStorage.getItem('recibos-psi'));
       }
 
-      if (saved && Object.is(saved) && Object.getOwnPropertyNames(saved).length > 0) {
-        saved.psycologist = psicologo.toJSON();
+      if (saved && typeof saved === "object") {
+        saved.psychologist = psicologo.toJSON();
+        console.log(saved.psychologist);
       }
+
+      localStorage.setItem('recibos-psi', JSON.stringify(saved))
+
     } catch (error) {
       alert('Falha ao salvar localmente os dados do psicólogo');
       throw new Error('Falha ao salvar localmente os dados do psicólogo. ' + error);

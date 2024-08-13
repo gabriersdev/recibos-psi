@@ -13,7 +13,7 @@ window.addEventListener('load', () => {
   // Adaptação de código para limpar console
   [1, 2, 3].forEach((e, i) => {
     setTimeout(() => {
-      console.clear();
+      // console.clear();
     }, i * 1000)
   })
 })
