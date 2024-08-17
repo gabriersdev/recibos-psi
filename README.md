@@ -2,6 +2,8 @@
 
 Este projeto é uma aplicação web para gerar recibos de pagamento para psicólogos, utilizando React, MUI (Material-UI), JQuery, JQuery Mask e PDFMake.
 
+![Captura de tela](./screen-1.png)
+
 ## Funcionalidades
 
 - **Criação de recibos personalizados**: Insira informações do paciente, detalhes da sessão e valores pagos.
