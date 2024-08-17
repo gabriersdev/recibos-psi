@@ -51,6 +51,10 @@ export default class Psicologo {
     return this.#id
   }
 
+  getOriginalID(){
+    return this.#originalId
+  }
+
   getNome() {
     return this.#nome;
   }
