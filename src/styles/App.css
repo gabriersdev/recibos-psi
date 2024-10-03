@@ -31,19 +31,19 @@ fieldset {
 /* Width */
 
 .width-25 {
-  width: min(100%, 25ch) !important;
+  width: max(100%, 25ch) !important;
 }
 
 .width-50 {
-  width: min(100%, 50ch) !important;
+  width: max(100%, 50ch) !important;
 }
 
 .width-75 {
-  width: min(100%, 75ch) !important;
+  width: max(100%, 75ch) !important;
 }
 
 .width-100 {
-  width: min(100%, 100ch) !important;
+  width: max(100%, 100ch) !important;
 }
 
 @keyframes logo-spin {
