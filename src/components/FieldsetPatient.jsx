@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Util from '../class/Util';
 
 import $ from "jquery";
-import 'jquery-mask-plugin'; 
+import 'jquery-mask-plugin';
 
 // Imports para Autocomplete
 import moment from "moment";
@@ -31,7 +31,7 @@ function FieldsetPatient(attr) {
   const [options, setOptions] = useState([]);
   const [mes, setMes] = useState(moment().get('month'));
   const [ano, setAno] = useState(moment().get('year'));
-  
+
   // Set valor do mês na Intermediate
   Intermediate.setMesSessao(mes);
 
@@ -56,26 +56,27 @@ function FieldsetPatient(attr) {
     if (value.length == 0) input.setCustomValidity('Selecione um mês')
     else input.setCustomValidity(''); event.preventDefault(); Intermediate.setMesSessao(value);
   };
-  
+
   $(() => {
     $('#pat-CPF').mask('000.000.000-00');
     $('#pat-vr-sessao').mask('#.###.##0,00', { reverse: true });
   });
 
   return (
-    <fieldset style={{textAlign: 'left'}}>
+    <fieldset style={{ textAlign: 'left' }}>
       <h2>Paciente</h2>
       <Box
-      sx={{
-        '& > :not(style)': { m: 0.5, width: '25ch', mt: 1.75},
-        display: 'flex', flexWrap: 'wrap'
-      }}
-      autoComplete="off"
+        sx={{
+          '& > :not(style)': { m: 0.5, mt: 1.75 },
+          display: 'flex', flexWrap: 'wrap'
+        }}
+        autoComplete="off"
+        className="width-25"
       >
         {/* TODO - Oferecer autocomplete com dados recuperados de pacientes */}
-        <TextField id="pat-name" label="Nome" variant="outlined" value={name} onChange={e => setName(e.target.value)} style={{width: '75ch'}} required={attr.required}/>
-        <TextField id="pat-CPF" label="CPF" variant="outlined" value={CPF} onChange={e => setCPF(e.target.value)} required={attr.required} onInput={e => !Util.validaCPF(e.target.value) ? e.target.setCustomValidity('O CPF informado não é válido') : e.target.setCustomValidity('')}/>
-        <TextField id="pat-vr-sessao" label="Valor sessão" variant="outlined" value={valorSessao} onInput={handleValorSessao} required={attr.required}/>
+        <TextField id="pat-name" label="Nome" variant="outlined" value={name} onChange={e => setName(e.target.value)} className='width-75' required={attr.required} />
+        <TextField id="pat-CPF" label="CPF" variant="outlined" value={CPF} onChange={e => setCPF(e.target.value)} required={attr.required} onInput={e => !Util.validaCPF(e.target.value) ? e.target.setCustomValidity('O CPF informado não é válido') : e.target.setCustomValidity('')} />
+        <TextField id="pat-vr-sessao" label="Valor sessão" variant="outlined" value={valorSessao} onInput={handleValorSessao} required={attr.required} />
         <Autocomplete
           multiple
           id="pat-days"
@@ -83,7 +84,7 @@ function FieldsetPatient(attr) {
           options={options}
           getOptionLabel={(option) => option.value}
           isOptionEqualToValue={(option, value) => option.key === value.key}
-          style={{ width: 300 }}
+          className='width-50'
           renderInput={(params, index) => (
             <TextField {...params} key={index} label="Dias das sessões*" variant="outlined" />
           )}
@@ -91,34 +92,34 @@ function FieldsetPatient(attr) {
 
         {/* TODO - Recuperar mês selecionado */}
         <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="pat-mes-sessao-label">Mês*</InputLabel>
-        <Select
-          labelId="pat-mes-sessao-label"
-          id="pat-mes-sessao"
-          value={mes}
-          label="pat-mes-sessao"
-          onChange={handleChange}
-        >
-          <MenuItem value="">
-            <em>Selecione</em>
-          </MenuItem>
-          <MenuItem value="0">Janeiro</MenuItem>
-          <MenuItem value="1">Fevereiro</MenuItem>
-          <MenuItem value="2">Março</MenuItem>
-          <MenuItem value="3">Abril</MenuItem>
-          <MenuItem value="4">Maio</MenuItem>
-          <MenuItem value="5">Junho</MenuItem>
-          <MenuItem value="6">Julho</MenuItem>
-          <MenuItem value="7">Agosto</MenuItem>
-          <MenuItem value="8">Setembro</MenuItem>
-          <MenuItem value="9">Outubro</MenuItem>
-          <MenuItem value="10">Novembro</MenuItem>
-          <MenuItem value="11">Dezembro</MenuItem>
-        </Select>
-      </FormControl>
-      <TextField id="pat-ano-sessao" label="Ano" variant="outlined" value={ano} onInput={e => setAno(e.target.value)} required={attr.required}/>
+          <InputLabel id="pat-mes-sessao-label">Mês*</InputLabel>
+          <Select
+            labelId="pat-mes-sessao-label"
+            id="pat-mes-sessao"
+            value={mes}
+            label="pat-mes-sessao"
+            onChange={handleChange}
+          >
+            <MenuItem value="">
+              <em>Selecione</em>
+            </MenuItem>
+            <MenuItem value="0">Janeiro</MenuItem>
+            <MenuItem value="1">Fevereiro</MenuItem>
+            <MenuItem value="2">Março</MenuItem>
+            <MenuItem value="3">Abril</MenuItem>
+            <MenuItem value="4">Maio</MenuItem>
+            <MenuItem value="5">Junho</MenuItem>
+            <MenuItem value="6">Julho</MenuItem>
+            <MenuItem value="7">Agosto</MenuItem>
+            <MenuItem value="8">Setembro</MenuItem>
+            <MenuItem value="9">Outubro</MenuItem>
+            <MenuItem value="10">Novembro</MenuItem>
+            <MenuItem value="11">Dezembro</MenuItem>
+          </Select>
+        </FormControl>
+        <TextField id="pat-ano-sessao" label="Ano" variant="outlined" value={ano} onInput={e => setAno(e.target.value)} required={attr.required} />
       </Box>
-    </fieldset>
+    </fieldset >
   );
 }
 

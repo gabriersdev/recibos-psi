@@ -11,11 +11,11 @@ import Intermediate from '../class/Intermediate';
 
 import Util from '../class/Util';
 
-  // Recieve
-const handleSubmit = (event) => { 
+// Recieve
+const handleSubmit = (event) => {
   event.preventDefault();
   // Aqui você pode lidar com a submissão do formulário
-  
+
   const data = {
     "psi-name": null,
     "psi-email": null,
@@ -57,7 +57,7 @@ const handleSubmit = (event) => {
       else if (key === 'pat-mes-sessao') {
         if (Intermediate.getMesSessao() >= 0) data[key] = Intermediate.getMesSessao();
         else data[key] = null;
-      } 
+      }
       else {
         if (Intermediate.getSelectDays().length > 0) data["pat-days"] = Intermediate.getSelectDays();
         else data["pat-days"] = null;
@@ -74,7 +74,7 @@ const handleSubmit = (event) => {
       notFilled.push(altName[key] || key);
     }
   }
-  
+
   if (notFilled.length == 1) {
     Swal.fire({
       icon: 'error',
@@ -90,7 +90,7 @@ const handleSubmit = (event) => {
     });
     return;
   }
-  
+
   // Validar campos de CPF
   if (data["psi-CPF"].match(/\d/g).length !== 11) {
     alert('CPF do psicólogo inválido');
@@ -133,15 +133,15 @@ const handleSubmit = (event) => {
 
 const required = true;
 
-export default function RecieveForm(){
+export default function RecieveForm() {
   return (
     <form
       onSubmit={handleSubmit}
     >
-      <FieldsetPsychologist required={required}/>
-      <FieldsetPatient required={required}/>
+      <FieldsetPsychologist required={required} />
+      <FieldsetPatient required={required} />
       {/* <FieldsetRecieve/> */}
-      <Button type='submit' variant="contained" style={{padding: '1rem', width: '25ch', marginTop: '1rem', float: 'left'}}>ENVIAR</Button><br/>
+      <Button type='submit' variant="contained" className='width-25' style={{ padding: '1rem', marginTop: '1rem', float: 'left' }}>ENVIAR</Button><br />
     </form>
   )
 }

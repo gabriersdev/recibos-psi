@@ -3,7 +3,7 @@
   margin: 0 auto;
   margin-bottom: 5rem;
   padding: 2rem;
-  text-align: center; 
+  text-align: center;
 }
 
 .logo {
@@ -12,9 +12,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -26,10 +28,29 @@ fieldset {
   margin: 1em 0;
 }
 
+/* Width */
+
+.width-25 {
+  width: min(100%, 25ch) !important;
+}
+
+.width-50 {
+  width: min(100%, 50ch) !important;
+}
+
+.width-75 {
+  width: min(100%, 75ch) !important;
+}
+
+.width-100 {
+  width: min(100%, 100ch) !important;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -49,6 +70,6 @@ fieldset {
   color: #888;
 }
 
-.swal2-title{
+.swal2-title {
   line-height: 1.25 !important;
 }

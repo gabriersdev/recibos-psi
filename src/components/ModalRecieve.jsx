@@ -25,13 +25,13 @@ pdfMake.fonts = {
   },
 }
 
-function ModalRecieve() {  
+function ModalRecieve() {
   const [valorTotal, setValorTotal] = useState('');
-  
+
   $(() => {
     $('#rec-valor-tot').mask('#.###.##0,00', { reverse: true });
   })
-  
+
   const handleButton = () => {
     const valor = $('#rec-valor-tot').val();
     if (valor) {
@@ -43,8 +43,8 @@ function ModalRecieve() {
   const handleSubmit = (e) => {
     const data = Intermediate.getData();
     e.preventDefault();
-    
-    const psicologo = new Psicologo(data["psi-name"], data["psi-CPF"], data["psi-CRP"], data["psi-atuacao"], 'Psicólogo', {completo: data["psi-endereco"]}, {email: data["psi-email"], telefone: data["psi-tel"], nickRede: data["psi-nickredes"]});
+
+    const psicologo = new Psicologo(data["psi-name"], data["psi-CPF"], data["psi-CRP"], data["psi-atuacao"], 'Psicólogo', { completo: data["psi-endereco"] }, { email: data["psi-email"], telefone: data["psi-tel"], nickRede: data["psi-nickredes"] });
 
     // Salvando localmente dados do piscologo
     try {
@@ -78,7 +78,7 @@ function ModalRecieve() {
     // Gerar PDF do recibo
     pdfMake.createPdf({
       content: recibo.renderRecibo(),
-      
+
       // Styles
       styles: {
         default: {
@@ -99,17 +99,17 @@ function ModalRecieve() {
 
   return (
     <dialog id='modal-form-recibo'>
-      <form style={{marginBottom: '2rem', textAlign: 'left'}} onSubmit={handleSubmit}>
+      <form style={{ marginBottom: '2rem', textAlign: 'left' }} onSubmit={handleSubmit}>
         <h2>Recibo</h2>
         <div>
           <span><b>Valor total:&nbsp;</b><span id='valor-tot'></span></span>
-        </div><br/>
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.25rem'}}>
-          <Input id="rec-valor-tot" label="Valor total" variant="outlined" value={valorTotal} onInput={e => setValorTotal(e.target.value)} style={{width: '75ch'}} required={false} placeholder='Novo valor total'/>
+        </div><br />
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.25rem' }}>
+          <Input id="rec-valor-tot" label="Valor total" variant="outlined" value={valorTotal} onInput={e => setValorTotal(e.target.value)} className='width-75' required={false} placeholder='Novo valor total' />
           <Button onClick={handleButton}>Alterar</Button>
         </div><br />
-        <Button type='submit' variant="contained" style={{padding: '1rem', width: '25ch', marginTop: '1rem', float: 'left'}}>IMPRIMIR</Button>
-        <Button type='button' variant="outlined" style={{padding: '1rem', width: '25ch', marginTop: '1rem', marginLeft: '1rem', float: 'left'}} onClick={(e) => e.target.closest('dialog').close()}>FECHAR</Button>
+        <Button type='submit' variant="contained" className='width-25' style={{ padding: '1rem', marginTop: '1rem', float: 'left' }}>IMPRIMIR</Button>
+        <Button type='button' variant="outlined" className='width-25' style={{ padding: '1rem', marginTop: '1rem', marginLeft: '1rem', float: 'left' }} onClick={(e) => e.target.closest('dialog').close()}>FECHAR</Button>
       </form>
     </dialog>
   );
