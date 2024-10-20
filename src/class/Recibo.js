@@ -57,7 +57,7 @@ export default class Recibo {
       { text: `CPF: ${this.#psicologo.getCPF()}` }, { text: '  '}, { text: '  '},
       { text: this.#psicologo.getEndereco() || '' },
       { text: `${this.#psicologo.getNome()} - ${this.#psicologo.getAtuacao()} - ${this.#psicologo.getTelefone()}` },
-      { text: `${this.#psicologo.getContato()}}` }
+      { text: `${this.#psicologo.getContato()}` }
     ].map((item) => { !item.style ? item.style = 'default' : ''; return item });
   }
 }
