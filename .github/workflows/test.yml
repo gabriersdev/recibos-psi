@@ -3,7 +3,7 @@ name: Cypress Tests and Deploy
 on:
   pull_request:
     branches:
-      - main # ou a sua branch principal
+      - main 
 
 jobs:
   build-and-test:
@@ -16,32 +16,24 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16 # ou a sua versão do Node.js
+          node-version: 16 # ou a versão desejada
 
       - name: Install Dependencies
         run: npm install
 
       - name: Build App
-        run: npm run build # ou o comando para build da sua aplicação
+        run: npm run build
 
       - name: Deploy to Surge
-        uses: dswistowski/surge-github-action@v2
-        with:
-          login: ${{ secrets.SURGE_LOGIN }}
-          token: ${{ secrets.SURGE_TOKEN }}
-          project: ./build # caminho para o diretório de build
+        run: |
+          npm install --global surge
+          surge ./build ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
+        env:
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
 
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v5
         with:
-          start: npm run cy:run # comando para iniciar o Cypress
-          wait-on: ${{ steps.deploy-to-surge.outputs.preview_url }} 
-      
-      - name: Merge Pull Request (apenas se os testes passarem)
-        if: github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' && job.status == 'success'
-        uses: pascalgn/automerge-action@v0.15.3
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        with:
-          pull_request: "${{ github.event.pull_request.number }}"
-          merge_method: "merge"
+          start: npm run start
+          wait-on: 'https://${{ secrets.SURGE_DOMAIN }}'
