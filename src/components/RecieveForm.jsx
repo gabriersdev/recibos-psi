@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
 import Swal from 'sweetalert2'
 
@@ -141,7 +141,7 @@ export default function RecieveForm() {
       <FieldsetPsychologist required={required} />
       <FieldsetPatient required={required} />
       {/* <FieldsetRecieve/> */}
-      <Button type='submit' variant="contained" className='width-25' style={{ padding: '1rem', marginTop: '1rem', float: 'left' }}>ENVIAR</Button><br />
+      <Button type='submit' id="btn-submit-form" variant="contained" className='width-25' style={{ padding: '1rem', marginTop: '1rem', float: 'left' }}>ENVIAR</Button><br />
     </form>
   )
 }

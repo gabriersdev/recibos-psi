@@ -1,3 +1,4 @@
+import React from 'react';
 import './styles/App.css'
 import RecieveForm from './components/RecieveForm';
 import ModalRecieve from './components/ModalRecieve';
@@ -19,8 +20,8 @@ const theme = createTheme({
 function App() {
   return (
     <Box>
-      <ThemeProvider  theme={theme}>
-        <h1 style={{textAlign: 'left'}}>Gerador de Recibo</h1>
+      <ThemeProvider theme={theme}>
+        <h1 style={{ textAlign: 'left' }}>Gerador de Recibo</h1>
         <RecieveForm></RecieveForm>
         <ModalRecieve></ModalRecieve>
       </ThemeProvider>
