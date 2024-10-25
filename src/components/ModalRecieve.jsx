@@ -1,3 +1,4 @@
+import React from 'react';
 import '../styles/ModalRecieve.css';
 import Util from '../class/Util';
 import Intermediate from '../class/Intermediate';
