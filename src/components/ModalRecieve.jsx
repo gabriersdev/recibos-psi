@@ -109,8 +109,10 @@ function ModalRecieve() {
           <Input id="rec-valor-tot" label="Valor total" variant="outlined" value={valorTotal} onInput={e => setValorTotal(e.target.value)} className='width-75' required={false} placeholder='Novo valor total' />
           <Button onClick={handleButton}>Alterar</Button>
         </div><br />
-        <Button type='submit' variant="contained" className='width-25' style={{ padding: '1rem', marginTop: '1rem', float: 'left' }}>IMPRIMIR</Button>
-        <Button type='button' variant="outlined" className='width-25' style={{ padding: '1rem', marginTop: '1rem', marginLeft: '1rem', float: 'left' }} onClick={(e) => e.target.closest('dialog').close()}>FECHAR</Button>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '1rem' }}>
+          <Button type='submit' variant="contained" className='width-25' style={{ padding: '1rem', float: 'left' }}>IMPRIMIR</Button>
+          <Button type='button' variant="outlined" className='width-25' style={{ padding: '1rem', float: 'left' }} onClick={(e) => e.target.closest('dialog').close()}>FECHAR</Button>
+        </div>
       </form>
     </dialog>
   );
