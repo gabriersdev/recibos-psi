@@ -1,39 +1,46 @@
-name: Cypress Tests and Deploy
+name: CI/CD com Aprovação de Pull Request
 
 on:
   pull_request:
+    types: [ opened, synchronize, reopened, closed ]
     branches:
-      - main 
+      - main # Branch protegida
 
 jobs:
-  build-and-test:
+  test:
+    if: github.event.action != 'closed' # Executa testes em todos os eventos, exceto quando o PR é fechado
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
+      - uses: actions/checkout@v3
+      - name: Instalar dependências
         uses: actions/setup-node@v3
         with:
-          node-version: 16 # ou a versão desejada
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Build App
+          node-version: 16
+      - run: npm install
+      - name: Construir o site
         run: npm run build
-
-      - name: Deploy to Surge
-        run: |
-          npm install --global surge
-          surge ./build ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
-        env:
-          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-
-      - name: Run Cypress Tests
-        uses: cypress-io/github-action@v5
+      - name: Testar links
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
         with:
-          start: npm run start
-          wait-on: 'https://${{ secrets.SURGE_DOMAIN }}'
+          base-url: 'https://gabriersdev.github.io/recibos-psi'
+
+  deploy:
+    if: github.event.pull_request.merged == true && github.ref == 'refs/heads/main' # Só implanta após o merge na branch main
+    needs: test # Garante que os testes passem antes da implantação
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: main # Checkout da branch principal após o merge
+      - name: Instalar dependências
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install
+      - name: Construir o site
+        run: npm run build
+      - name: Implantar no GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
