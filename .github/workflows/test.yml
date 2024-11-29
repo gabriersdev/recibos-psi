@@ -1,47 +1,46 @@
-name: Cypress Tests and Deploy
+name: CI/CD com Aprovação de Pull Request
 
 on:
   pull_request:
+    types: [ opened, synchronize, reopened, closed ]
     branches:
-      - main # ou a sua branch principal
+      - main # Branch protegida
 
 jobs:
-  build-and-test:
+  test:
+    if: github.event.action != 'closed' # Executa testes em todos os eventos, exceto quando o PR é fechado
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
+      - uses: actions/checkout@v3
+      - name: Instalar dependências
         uses: actions/setup-node@v3
         with:
-          node-version: 16 # ou a sua versão do Node.js
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Build App
-        run: npm run build # ou o comando para build da sua aplicação
-
-      - name: Deploy to Surge
-        uses: dswistowski/surge-github-action@v2
+          node-version: 16
+      - run: npm install
+      - name: Construir o site
+        run: npm run build
+      - name: Testar links
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
         with:
-          login: ${{ secrets.SURGE_LOGIN }}
-          token: ${{ secrets.SURGE_TOKEN }}
-          project: ./build # caminho para o diretório de build
+          base-url: 'https://gabriersdev.github.io/recibos-psi'
 
-      - name: Run Cypress Tests
-        uses: cypress-io/github-action@v5
+  deploy:
+    if: github.event.pull_request.merged == true && github.ref == 'refs/heads/main' # Só implanta após o merge na branch main
+    needs: test # Garante que os testes passem antes da implantação
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
         with:
-          start: npm run cy:run # comando para iniciar o Cypress
-          wait-on: ${{ steps.deploy-to-surge.outputs.preview_url }} 
-      
-      - name: Merge Pull Request (apenas se os testes passarem)
-        if: github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' && job.status == 'success'
-        uses: pascalgn/automerge-action@v0.15.3
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          ref: main # Checkout da branch principal após o merge
+      - name: Instalar dependências
+        uses: actions/setup-node@v3
         with:
-          pull_request: "${{ github.event.pull_request.number }}"
-          merge_method: "merge"
+          node-version: 16
+      - run: npm install
+      - name: Construir o site
+        run: npm run build
+      - name: Implantar no GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
