@@ -2,17 +2,14 @@ import React from 'react';
 import { useState } from 'react';
 import TextField from "@mui/material/TextField";
 import Box from '@mui/material/Box';
-import Util from '../class/Util';
-
 import $ from "jquery";
 import 'jquery-mask-plugin';
-
 // Imports para Autocomplete
 import moment from "moment";
 import { useEffect } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import Intermediate from '../class/Intermediate';
-
+import Util from '../class/Util';
 // Imports para Select
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';

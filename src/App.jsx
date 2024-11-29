@@ -1,31 +1,20 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './styles/App.css'
-import RecieveForm from './components/RecieveForm';
-import ModalRecieve from './components/ModalRecieve';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 
-const theme = createTheme({
-  typography: {
-    fontFamily: [
-      '"Pretendard"',
-      '-apple-system',
-      '"Helvetica"',
-      'Arial',
-      'sans-serif'
-    ].join(','),
-  },
-});
+const Home = lazy(() => import('./components/Home'));
+const Test = lazy(() => import('./components/Test'));
 
 function App() {
   return (
-    <Box>
-      <ThemeProvider theme={theme}>
-        <h1 style={{ textAlign: 'left' }}>Gerador de Recibo</h1>
-        <RecieveForm></RecieveForm>
-        <ModalRecieve></ModalRecieve>
-      </ThemeProvider>
-    </Box>
+    <BrowserRouter>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path={"/recibos-psi/"} element={<Home/>}/>
+          <Route path={"/recibos-psi/test/"} element={<Test/>}/>
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   )
 }
 

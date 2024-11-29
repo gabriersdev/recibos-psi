@@ -24,7 +24,7 @@ export default class Util{
     if (resto !== parseInt(cpf.substring(10, 11))) return false;
     return true;
   }
-  
+
   static validaEmail(email) {
     if (typeof email !== 'string') return false;
     if (email.length < 5) return false;
@@ -32,7 +32,7 @@ export default class Util{
     if (email.indexOf('.') === -1) return false;
     return true;
   }
-  
+
   static validaTelefone(telefone) {
     if (typeof telefone !== 'string') return false;
     telefone = telefone.replace(/[\s()-]*/gim, '');
@@ -41,14 +41,14 @@ export default class Util{
     if (telefone.length === 11 && telefone[2] !== '9') return false;
     return true;
   }
-  
+
   static validaCEP(cep) {
     if (typeof cep !== 'string') return false;
     cep = cep.replace(/[\s.-]*/gim, '');
     if (cep.length !== 8) return false;
     return true;
   }
-  
+
   static validaCRP(crp) {
     if (typeof crp !== 'string') return false;
     if (crp.length < 5) return false;
@@ -77,7 +77,7 @@ export default class Util{
             case 12: mes = 'dezembro'; break;
             default: mes = 'janeiro'; break;
           }
-    
+
           return mes;
         }
         return null;
