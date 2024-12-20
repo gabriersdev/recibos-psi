@@ -8,7 +8,7 @@ const Test = lazy(() => import('./components/Test'));
 function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Carregando...</div>}>
         <Routes>
           <Route path={"/recibos-psi/"} element={<Home/>}/>
           <Route path={"/recibos-psi/test/"} element={<Test/>}/>
