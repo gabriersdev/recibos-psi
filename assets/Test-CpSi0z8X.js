@@ -1,0 +1,1 @@
+import{j as s}from"./index-CerffMev.js";import"./vendor_react-dom-Bun89IPh.js";const r=()=>s.jsxs("div",{children:[s.jsx("h1",{children:"Test"}),s.jsx("p",{children:"This is a test component."})]});export{r as default};
