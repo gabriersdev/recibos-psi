@@ -1,0 +1,1 @@
+import{j as s}from"./index-Dl3VEngT.js";import"./vendor_react-dom-0JZROgcK.js";const r=()=>s.jsxs("div",{children:[s.jsx("h1",{children:"Test"}),s.jsx("p",{children:"This is a test component."})]});export{r as default};
